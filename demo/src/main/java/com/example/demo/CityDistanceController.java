@@ -26,11 +26,6 @@ public class CityDistanceController {
         return cityDistanceService.getAllCities();
     }
 
-    @GetMapping("/rest/distance")
-    public ResponseEntity<List<Distance>> getDistance() {
-        return cityDistanceService.getDistance();
-    }
-
     @GetMapping("/rest/calculation")
     public ResponseEntity<List<CalculationResponse>> calculateDistances(
             @RequestParam CalculationType calculationType,
