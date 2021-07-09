@@ -63,7 +63,7 @@ public class CityDistanceService {
                 for (City city1 : toCitiesList) {
                     Optional<Distance> distanceOptional = distanceRepository.findByFromCityIdAndToCityId(city.getId(), city1.getId());
                     if (!distanceOptional.isPresent()) {
-                        throw new RuntimeException("Not found distance for fromCity " + city.getName() + " and toCity " + city1.getName());
+                        throw new CannotBeCalculatedException("Not found distance for fromCity " + city.getName() + " and toCity " + city1.getName());
                     }
                     result.add(new CalculationResponse(
                             DISTANCE_MATRIX,
