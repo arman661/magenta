@@ -1,0 +1,80 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="create-table-city" author="Arman">
+        <createTable tableName="city">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(64)"/>
+            <column name="latitude" type="double"/>
+            <column name="longitude" type="double"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-table-distance" author="Arman">
+        <createTable tableName="distance">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="from_city" type="BIGINT">
+                <constraints foreignKeyName="distance_from_city_city_id" references="city(id)"/>
+            </column>
+            <column name="to_city" type="BIGINT">
+                <constraints foreignKeyName="distance_to_city_city_id" references="city(id)"/>
+            </column>
+            <column name="distance" type="double"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="unknown" id="insert-example-2">
+        <insert tableName="city">
+            <column name="name" value="Samara"/>
+            <column name="latitude" value="53.2000700"/>
+            <column name="longitude" value="50.1500000"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="Arman" id="insert-city-3">
+        <insert tableName="city">
+            <column name="name" value="Togliatti"/>
+            <column name="latitude" value="53.5303000"/>
+            <column name="longitude" value="49.3461000"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="Arman" id="insert-city-4">
+        <insert tableName="city">
+            <column name="name" value="Saratov"/>
+            <column name="latitude" value="51.5405600"/>
+            <column name="longitude" value="46.0086100"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="Arman" id="insert-city-5">
+        <insert tableName="city">
+            <column name="name" value="Volgograd"/>
+            <column name="latitude" value="48.7193900"/>
+            <column name="longitude" value="44.5018300"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="Arman" id="insert-city-6">
+        <insert tableName="city">
+            <column name="name" value="Chelyabinsk"/>
+            <column name="latitude" value="55.1540200"/>
+            <column name="longitude" value="61.4291500"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="Arman" id="insert-distance-1">
+        <insert tableName="distance">
+            <column name="from_city" value="1"/>
+            <column name="to_city" value="2"/>
+            <column name="distance" value="100"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
