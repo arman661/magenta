@@ -1,5 +1,9 @@
 package com.example.demo;
 
+import com.example.demo.repository.CityRepository;
+import com.example.demo.repository.DistanceRepository;
+import com.example.demo.response.CalculationResponse;
+import com.example.demo.response.CityResponse;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -51,7 +55,7 @@ class PersonControllerTests {
         List<CityResponse> cities = objectMapper.readValue(contentAsString, new TypeReference<List<CityResponse>>() {
         });
 
-        assertEquals(5, cities.size());
+        assertTrue(cities.size() > 0);
         CityResponse city = cities.get(0);
         assertEquals("Samara", city.getName());
         assertTrue(null != city.getId());
@@ -101,29 +105,37 @@ class PersonControllerTests {
     }
 
     @Test
-    void testCreateDistances() throws Exception {
-        long count = distanceRepository.count();
+    public void testCreateCitiesAndDistances() throws Exception {
+        long distanceCount = distanceRepository.count();
+        long citiesCount = cityRepository.count();
         mockMvc.perform(
                 post("/rest/distance")
                         .contentType(MediaType.APPLICATION_XML)
-                        .content("\n" +
-                                "<ArrayOfDistanceCreationRequest xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://schemas.datacontract.org/2004/07/RestDataAccess\">\n" +
+                        .content("<CityAndDistanceCreationRequest>\n" +
+                                "    <cityCreationRequests>\n" +
+                                "        <CityCreationRequest>\n" +
+                                "            <name>Moscow</name>\n" +
+                                "            <latitude>42.51</latitude>\n" +
+                                "            <longitude>63.12</longitude>\n" +
+                                "        </CityCreationRequest>\n" +
+                                "    </cityCreationRequests>\n" +
                                 "\n" +
-                                "<DistanceCreationRequest>\n" +
-                                "<fromCity>Saratov</fromCity>\n" +
-                                "<toCity>Volgograd</toCity>\n" +
-                                "<distance>565</distance>\n" +
-                                "</DistanceCreationRequest>\n" +
-                                "\n" +
-                                "<DistanceCreationRequest>\n" +
-                                "<fromCity>Samara</fromCity>\n" +
-                                "<toCity>Volgograd</toCity>\n" +
-                                "<distance>656</distance>\n" +
-                                "</DistanceCreationRequest>\n" +
-                                "\n" +
-                                "\n" +
-                                "</ArrayOfDistanceCreationRequest>")
+                                "    <distanceCreationRequests>\n" +
+                                "        <DistanceCreationRequest>\n" +
+                                "            <fromCity>Saratov</fromCity>\n" +
+                                "            <toCity>Volgograd</toCity>\n" +
+                                "            <distance>565</distance>\n" +
+                                "        </DistanceCreationRequest>\n" +
+                                "        \n" +
+                                "        <DistanceCreationRequest>\n" +
+                                "            <fromCity>Samara</fromCity>\n" +
+                                "            <toCity>Volgograd</toCity>\n" +
+                                "            <distance>656</distance>\n" +
+                                "        </DistanceCreationRequest>\n" +
+                                "    </distanceCreationRequests>\n" +
+                                "</CityAndDistanceCreationRequest>")
         ).andExpect(status().isOk()).andReturn();
-        assertTrue(count + 2 == distanceRepository.count());
+        assertTrue(distanceCount + 2 == distanceRepository.count());
+        assertTrue(citiesCount + 1 == cityRepository.count());
     }
 }

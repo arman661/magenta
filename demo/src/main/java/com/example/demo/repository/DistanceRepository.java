@@ -1,6 +1,7 @@
-package com.example.demo;
+package com.example.demo.repository;
 
 
+import com.example.demo.entity.Distance;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;

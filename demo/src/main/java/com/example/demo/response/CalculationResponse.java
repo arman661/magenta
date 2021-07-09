@@ -1,5 +1,6 @@
-package com.example.demo;
+package com.example.demo.response;
 
+import com.example.demo.CalculationType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

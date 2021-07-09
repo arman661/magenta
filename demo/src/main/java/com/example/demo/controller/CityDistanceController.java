@@ -1,5 +1,11 @@
-package com.example.demo;
+package com.example.demo.controller;
 
+import com.example.demo.*;
+import com.example.demo.request.CityAndDistanceCreationRequest;
+import com.example.demo.request.DistanceCreationRequest;
+import com.example.demo.response.CalculationResponse;
+import com.example.demo.response.CityResponse;
+import com.example.demo.service.CityDistanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +23,9 @@ public class CityDistanceController {
             consumes = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE },
             produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE }
             )
-    public ResponseEntity createDistance(@RequestBody List<DistanceCreationRequest> distanceCreationRequestList) {
-        return cityDistanceService.createDistanceList(distanceCreationRequestList);
+    public ResponseEntity createDistance(@RequestBody CityAndDistanceCreationRequest cityAndDistanceCreationRequest) {
+        return cityDistanceService.createCitiesAndDistancesList(cityAndDistanceCreationRequest);
+
     }
 
     @GetMapping("/rest/city")

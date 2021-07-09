@@ -1,5 +1,15 @@
-package com.example.demo;
+package com.example.demo.service;
 
+import com.example.demo.*;
+import com.example.demo.entity.City;
+import com.example.demo.entity.Distance;
+import com.example.demo.repository.CityRepository;
+import com.example.demo.repository.DistanceRepository;
+import com.example.demo.request.CityAndDistanceCreationRequest;
+import com.example.demo.request.CityCreationRequest;
+import com.example.demo.request.DistanceCreationRequest;
+import com.example.demo.response.CalculationResponse;
+import com.example.demo.response.CityResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,7 +62,7 @@ public class CityDistanceService {
             for (City city : fromCitiesList) {
                 for (City city1 : toCitiesList) {
                     Optional<Distance> distanceOptional = distanceRepository.findByFromCityIdAndToCityId(city.getId(), city1.getId());
-                    if(!distanceOptional.isPresent()) {
+                    if (!distanceOptional.isPresent()) {
                         throw new RuntimeException("Not found distance for fromCity " + city.getName() + " and toCity " + city1.getName());
                     }
                     result.add(new CalculationResponse(
@@ -90,10 +100,11 @@ public class CityDistanceService {
         dist = rad2deg(dist);
         dist = dist * 60 * 1.1515;
 
-            dist = dist * 1.609344;
+        dist = dist * 1.609344;
 
         return (dist);
     }
+
     private double deg2rad(double deg) {
         return (deg * Math.PI / 180.0);
     }
@@ -133,6 +144,24 @@ public class CityDistanceService {
 
     public ResponseEntity createDistanceList(List<DistanceCreationRequest> distanceCreationRequestList) {
         for (DistanceCreationRequest distanceCreationRequest : distanceCreationRequestList) {
+            ResponseEntity response = createDistance(distanceCreationRequest);
+            if (!response.getStatusCode().is2xxSuccessful()) {
+                return response;
+            }
+        }
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    public ResponseEntity createCitiesAndDistancesList(CityAndDistanceCreationRequest cityAndDistanceCreationRequest) {
+        for (CityCreationRequest cityCreationRequest : cityAndDistanceCreationRequest.getCityCreationRequests()) {
+            City city = new City(
+                    cityCreationRequest.getName(),
+                    cityCreationRequest.getLatitude(),
+                    cityCreationRequest.getLongitude()
+            );
+            cityRepository.save(city);
+        }
+        for (DistanceCreationRequest distanceCreationRequest : cityAndDistanceCreationRequest.getDistanceCreationRequests()) {
             ResponseEntity response = createDistance(distanceCreationRequest);
             if (!response.getStatusCode().is2xxSuccessful()) {
                 return response;
