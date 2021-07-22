@@ -1,6 +1,6 @@
 FROM openjdk:8-jdk-alpine
 
-COPY target/demo-0.0.1-SNAPSHOT.jar /opt/demo.jar
+COPY target/demo-0.0.1-SNAPSHOT.jar  /opt/demo.jar
 COPY startup.sh /opt
 
 RUN chmod +x /opt/startup.sh
