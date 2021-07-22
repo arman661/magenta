@@ -16,6 +16,8 @@
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
+
+
 	<dependencies>
 		<dependency>
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
@@ -62,6 +64,10 @@
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
     </dependencies>
 
