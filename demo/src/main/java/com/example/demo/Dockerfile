@@ -1,4 +1,0 @@
-FROM mysql
-COPY script.sql /script.sql
-EXPOSE 3306/tcp
-CMD mysql db_name mysql_user: 'root' mysql.password: 'my-secret-pw' < script.sql
