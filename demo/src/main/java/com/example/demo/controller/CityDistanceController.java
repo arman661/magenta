@@ -28,6 +28,16 @@ public class CityDistanceController {
 
     }
 
+    @PostMapping(
+            path = {"/create-area"},
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+        )
+    public ResponseEntity createArea(@RequestBody AreaCreationRequest areaCreationRequest) {
+        return cityDistanceService.createArea(areaCreationRequest);
+    }
+
+
     @GetMapping("/rest/city")
     public ResponseEntity<List<CityResponse>> getCities() {
         return cityDistanceService.getAllCities();

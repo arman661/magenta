@@ -8,6 +8,6 @@ RUN chmod +x /opt/startup.sh
 ENV MEM_MIN="lg"
 ENV MEM_MAX="lg"
 
-EXPOSE 3306/tcp
+EXPOSE 23306/tcp
 
 CMD "/opt/startup.sh"

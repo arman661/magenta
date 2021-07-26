@@ -1,3 +1,3 @@
 #!/bin/bash
-mysql -uroot -proot <<EOF
+mysql -uroot -proot
 source /usr/local/script.sql;

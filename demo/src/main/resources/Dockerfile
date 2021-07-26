@@ -11,6 +11,8 @@
 
 FROM mysql:5.7.17
 
+
+
  # mysql working location
 ENV WORK_PATH /usr/local/
 
@@ -28,11 +30,13 @@ COPY ./$FILE_0 $WORK_PATH/
  #Place the shell file to be executed in the /docker-entrypoint-initdb.d/ directory, the container will automatically execute the shell
 COPY ./$INSTALL_DATA_SHELL $AUTO_RUN_DIR/
 
-CMD mysql --user=root --password distance_calculator
-#< script.sql
+#CMD mysql --user=root --password distance_calculator
+#< $WORK_PATH/script.sql
+
 
  #Add executable permissions to executable files
 RUN chmod a+x $AUTO_RUN_DIR/$INSTALL_DATA_SHELL
+
 
 
 

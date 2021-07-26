@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
 import com.example.demo.*;
+import com.example.demo.controller.AreaCreationRequest;
+import com.example.demo.controller.AreaCreationRequestList;
 import com.example.demo.entity.City;
 import com.example.demo.entity.Distance;
 import com.example.demo.repository.CityRepository;
@@ -166,6 +168,14 @@ public class CityDistanceService {
             if (!response.getStatusCode().is2xxSuccessful()) {
                 return response;
             }
+        }
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    public ResponseEntity createArea(AreaCreationRequest areaCreationRequest) {
+        areaCreationRequest.getName();
+        for(AreaCreationRequestList areaCreationRequestList: areaCreationRequest.getAreaCreationRequests()) {
+
         }
         return new ResponseEntity(HttpStatus.OK);
     }
