@@ -1,12 +1,13 @@
 package com.example.demo.controller;
 
 import com.example.demo.*;
+import com.example.demo.dto.AreaCreationRequest;
 import com.example.demo.request.CityAndDistanceCreationRequest;
-import com.example.demo.request.DistanceCreationRequest;
-import com.example.demo.response.CalculationResponse;
-import com.example.demo.response.CityResponse;
+import com.example.demo.dto.CalculationResponse;
+import com.example.demo.dto.CityResponse;
 import com.example.demo.service.CityDistanceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +24,8 @@ public class CityDistanceController {
             consumes = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE },
             produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE }
             )
-    public ResponseEntity createDistance(@RequestBody CityAndDistanceCreationRequest cityAndDistanceCreationRequest) {
-        return cityDistanceService.createCitiesAndDistancesList(cityAndDistanceCreationRequest);
+    public void createDistance(@RequestBody CityAndDistanceCreationRequest cityAndDistanceCreationRequest) {
+        cityDistanceService.createCitiesAndDistancesList(cityAndDistanceCreationRequest);
 
     }
 
@@ -33,14 +34,14 @@ public class CityDistanceController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
         )
-    public ResponseEntity createArea(@RequestBody AreaCreationRequest areaCreationRequest) {
-        return cityDistanceService.createArea(areaCreationRequest);
+    public void createArea(@RequestBody AreaCreationRequest areaCreationRequest) {
+        cityDistanceService.createArea(areaCreationRequest);
     }
 
 
     @GetMapping("/rest/city")
     public ResponseEntity<List<CityResponse>> getCities() {
-        return cityDistanceService.getAllCities();
+        return ResponseEntity.ok(cityDistanceService.getAllCities());
     }
 
     @GetMapping("/rest/calculation")
@@ -49,7 +50,13 @@ public class CityDistanceController {
             @RequestParam List<String> fromCities,
             @RequestParam List<String> toCities
     ) {
-      return cityDistanceService.calculateDistance(calculationType, fromCities, toCities);
+        try {
+            List<CalculationResponse> calculationResultList = cityDistanceService
+                    .calculateDistance(calculationType, fromCities, toCities);
+            return ResponseEntity.status(HttpStatus.OK).body(calculationResultList);
+        } catch (CannotBeCalculatedException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
 
 }
