@@ -1,10 +1,10 @@
 package com.example.demo.repository;
 
-import com.example.demo.entity.City1;
+import com.example.demo.entity.City;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
-public interface CityRepository extends CrudRepository<City1, Long> {
-    Optional<City1> findByName(String name);
+public interface CityRepository extends CrudRepository<City, Long> {
+    Optional<City> findByName(String name);
 }

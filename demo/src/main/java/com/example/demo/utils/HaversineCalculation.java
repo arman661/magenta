@@ -1,12 +1,12 @@
 package com.example.demo.utils;
 
-import com.example.demo.entity.City1;
+import com.example.demo.entity.City;
 
 public class HaversineCalculation {
 
     private HaversineCalculation() {}
 
-    public static Double calculateDistance(City1 cityA, City1 cityB) {
+    public static Double calculateDistance(City cityA, City cityB) {
         Double latitudeA = cityA.getLatitude();
         Double longitudeA = cityA.getLongitude();
         Double latitudeB = cityB.getLatitude();

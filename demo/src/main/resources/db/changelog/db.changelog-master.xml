@@ -3,7 +3,18 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <changeSet id="create-table-city77" author="Arman">
+
+    <changeSet id="create-table-city_112" author="Arman">
+        <createTable tableName="city12">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(64)"/>
+            <column name="point" type="point"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-table-city_21" author="Arman">
         <createTable tableName="city">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
@@ -14,23 +25,54 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="create-table-distance77" author="Arman">
+
+    <changeSet id="create-table-distance16" author="Arman">
         <createTable tableName="distance">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="from_city" type="BIGINT">
-                <constraints foreignKeyName="distance_from_city_city_id" references="city(id)"/>
+                <constraints foreignKeyName="distance_from_city_city1_id" references="city(id)"/>
             </column>
             <column name="to_city" type="BIGINT">
-                <constraints foreignKeyName="distance_to_city_city_id" references="city(id)"/>
+                <constraints foreignKeyName="distance_to_city_city1_id" references="city(id)"/>
             </column>
             <column name="distance" type="double"/>
         </createTable>
     </changeSet>
 
 
-    <changeSet author="Arman" id="insert-example-277">
+    <!--    <changeSet author="Arman" id="insert-distance-2">-->
+    <!--        <insert tableName="distance">-->
+    <!--            <column name="from_city" value="1"/>-->
+    <!--            <column name="to_city" value="2"/>-->
+    <!--            <column name="distance" value="100"/>-->
+    <!--        </insert>-->
+    <!--    </changeSet>-->
+
+    <changeSet id="create-table-area_2" author="Arman">
+        <createTable tableName="area">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(64)"/>
+            <column name="polygon" type="polygon"/>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet id="create-table-POLYGONS_CONTAINS_CITY" author="Arman">
+        <createTable tableName="POLYGONS_CONTAINS_CITY">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="city" type="varchar(64)"/>
+            <column name="polygon" type="varchar(64)"/>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet author="Arman" id="insert-example-21">
         <insert tableName="city">
             <column name="name" value="Samara"/>
             <column name="latitude" value="53.2000700"/>
@@ -38,7 +80,7 @@
         </insert>
     </changeSet>
 
-    <changeSet author="Arman" id="insert-city-377">
+    <changeSet author="Arman" id="insert-city-31">
         <insert tableName="city">
             <column name="name" value="Togliatti"/>
             <column name="latitude" value="53.5303000"/>
@@ -46,7 +88,7 @@
         </insert>
     </changeSet>
 
-    <changeSet author="Arman" id="insert-city-477">
+    <changeSet author="Arman" id="insert-city-41">
         <insert tableName="city">
             <column name="name" value="Saratov"/>
             <column name="latitude" value="51.5405600"/>
@@ -54,7 +96,7 @@
         </insert>
     </changeSet>
 
-    <changeSet author="Arman" id="insert-city-577">
+    <changeSet author="Arman" id="insert-city-51">
         <insert tableName="city">
             <column name="name" value="Volgograd"/>
             <column name="latitude" value="48.7193900"/>
@@ -62,7 +104,7 @@
         </insert>
     </changeSet>
 
-    <changeSet author="Arman" id="insert-city-677">
+    <changeSet author="Arman" id="insert-city-61">
         <insert tableName="city">
             <column name="name" value="Chelyabinsk"/>
             <column name="latitude" value="55.1540200"/>
@@ -70,12 +112,13 @@
         </insert>
     </changeSet>
 
-    <changeSet author="Arman" id="insert-distance-177">
-        <insert tableName="distance">
-            <column name="from_city" value="1"/>
-            <column name="to_city" value="2"/>
-            <column name="distance" value="100"/>
+    <changeSet author="Arman" id="insert-city-62">
+        <insert tableName="city">
+            <column name="name" value="ul.Avrora"/>
+            <column name="latitude" value="53.215509"/>
+            <column name="longitude" value="50.187033"/>
         </insert>
     </changeSet>
+
 
 </databaseChangeLog>
