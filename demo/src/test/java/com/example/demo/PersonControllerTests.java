@@ -2,8 +2,8 @@ package com.example.demo;
 
 import com.example.demo.repository.CityRepository;
 import com.example.demo.repository.DistanceRepository;
-import com.example.demo.response.CalculationResponse;
-import com.example.demo.response.CityResponse;
+import com.example.demo.dto.CalculationResponse;
+import com.example.demo.dto.CityResponse;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;

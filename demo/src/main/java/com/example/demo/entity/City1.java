@@ -9,7 +9,7 @@ import javax.persistence.Id;
 
 @Entity
 @Data
-public class City {
+public class City1 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,12 +17,12 @@ public class City {
     private Double latitude;
     private Double longitude;
 
-    public City(String name, Double latitude, Double longitude) {
+    public City1(String name, Double latitude, Double longitude) {
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
     }
 
-    public City() {
+    public City1() {
     }
 }

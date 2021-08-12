@@ -1,4 +1,4 @@
-package com.example.demo.response;
+package com.example.demo.dto;
 
 import com.example.demo.CalculationType;
 import lombok.AllArgsConstructor;

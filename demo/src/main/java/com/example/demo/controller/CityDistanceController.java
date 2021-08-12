@@ -1,8 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.*;
-import com.example.demo.dto.AreaCreationRequest;
-import com.example.demo.request.CityAndDistanceCreationRequest;
+import com.example.demo.dto.CityAndDistanceCreationRequest;
 import com.example.demo.dto.CalculationResponse;
 import com.example.demo.dto.CityResponse;
 import com.example.demo.service.CityDistanceService;
@@ -29,14 +28,7 @@ public class CityDistanceController {
 
     }
 
-    @PostMapping(
-            path = {"/create-area"},
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE
-        )
-    public void createArea(@RequestBody AreaCreationRequest areaCreationRequest) {
-        cityDistanceService.createArea(areaCreationRequest);
-    }
+
 
 
     @GetMapping("/rest/city")
