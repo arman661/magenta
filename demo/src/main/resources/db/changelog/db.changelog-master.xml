@@ -4,17 +4,8 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
 
-    <changeSet id="create-table-city_112" author="Arman">
-        <createTable tableName="city12">
-            <column name="id" type="BIGINT" autoIncrement="true">
-                <constraints nullable="false" primaryKey="true"/>
-            </column>
-            <column name="name" type="varchar(64)"/>
-            <column name="point" type="point"/>
-        </createTable>
-    </changeSet>
 
-    <changeSet id="create-table-city_21" author="Arman">
+    <changeSet id="create-table-city_77" author="Arman">
         <createTable tableName="city">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
@@ -26,7 +17,7 @@
     </changeSet>
 
 
-    <changeSet id="create-table-distance16" author="Arman">
+    <changeSet id="create-table-distance77" author="Arman">
         <createTable tableName="distance">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
