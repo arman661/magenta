@@ -27,11 +27,11 @@ public class AreaRepositoryClass {
                 .setParameter(1, areaCreationRequest.getName())
                 .setParameter(2, jsonString)
                 .executeUpdate();
-        String point = "POINT(city.latitude city.longitude)";
-        entityManager.createNativeQuery("INSERT INTO POLYGONS_CONTAINS_CITY(city, polygon) SELECT a.name, b.name FROM city a, area b WHERE b.name = ?1 AND ST_Within( ST_GeomFromText(?2, 4326),  b.polygon)=1;")
-                .setParameter(1, areaCreationRequest.getName())
-                .setParameter(2, point)
-                .executeUpdate();
+        String point = "POINT(a.latitude a.longitude)";
+//        entityManager.createNativeQuery("INSERT INTO POLYGONS_CONTAINS_CITY(city, polygon) SELECT a.name, b.name FROM city a, area b WHERE b.name = ?1 AND ST_Within( ST_GeomFromText('POINT(a.latitude a.longitude), 4326),  b.polygon)=1")
+//                .setParameter(1, areaCreationRequest.getName())
+//                .setParameter(2, point)
+//                .executeUpdate();
     }
 
     public void deleteArea(Long id) {

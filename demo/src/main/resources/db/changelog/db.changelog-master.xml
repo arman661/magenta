@@ -63,7 +63,7 @@
     </changeSet>
 
 
-    <changeSet author="Arman" id="insert-example-21">
+    <changeSet author="Arman" id="insert-example-218">
         <insert tableName="city">
             <column name="name" value="Samara"/>
             <column name="latitude" value="53.2000700"/>
@@ -71,7 +71,7 @@
         </insert>
     </changeSet>
 
-    <changeSet author="Arman" id="insert-city-31">
+    <changeSet author="Arman" id="insert-city-318">
         <insert tableName="city">
             <column name="name" value="Togliatti"/>
             <column name="latitude" value="53.5303000"/>
@@ -79,7 +79,7 @@
         </insert>
     </changeSet>
 
-    <changeSet author="Arman" id="insert-city-41">
+    <changeSet author="Arman" id="insert-city-418">
         <insert tableName="city">
             <column name="name" value="Saratov"/>
             <column name="latitude" value="51.5405600"/>
@@ -87,7 +87,7 @@
         </insert>
     </changeSet>
 
-    <changeSet author="Arman" id="insert-city-51">
+    <changeSet author="Arman" id="insert-city-518">
         <insert tableName="city">
             <column name="name" value="Volgograd"/>
             <column name="latitude" value="48.7193900"/>
@@ -95,7 +95,7 @@
         </insert>
     </changeSet>
 
-    <changeSet author="Arman" id="insert-city-61">
+    <changeSet author="Arman" id="insert-city-618">
         <insert tableName="city">
             <column name="name" value="Chelyabinsk"/>
             <column name="latitude" value="55.1540200"/>
@@ -103,7 +103,7 @@
         </insert>
     </changeSet>
 
-    <changeSet author="Arman" id="insert-city-62">
+    <changeSet author="Arman" id="insert-city-628">
         <insert tableName="city">
             <column name="name" value="ul.Avrora"/>
             <column name="latitude" value="53.215509"/>

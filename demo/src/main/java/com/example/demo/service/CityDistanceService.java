@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -121,11 +122,11 @@ public class CityDistanceService {
         return Optional.ofNullable(save.getId());
     }
 
+
     public void createCitiesAndDistancesList(CityAndDistanceCreationRequest cityAndDistanceCreationRequest) {
         for (CityCreationRequest cityCreationRequest : cityAndDistanceCreationRequest.getCityCreationRequests()) {
             City city = new City(
                     cityCreationRequest.getName(),
-//                    cityCreationRequest.getPoints().get(0).getLatitude();
                     cityCreationRequest.getLatitude(),
                     cityCreationRequest.getLongitude()
             );
@@ -185,4 +186,6 @@ public class CityDistanceService {
         return ResponseEntity.ok(areaRepositoryClass.getAreasContainsArea(city));
 
     }
+
+
 }
