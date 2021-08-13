@@ -1,8 +1,8 @@
 package com.example.demo.service;
 
 import com.example.demo.*;
-import com.example.demo.entity.City1;
-import com.example.demo.entity.Distance1;
+import com.example.demo.entity.City;
+import com.example.demo.entity.Distance;
 import com.example.demo.repository.CityRepository;
 import com.example.demo.repository.DistanceRepository;
 import com.example.demo.dto.CityAndDistanceCreationRequest;
@@ -38,11 +38,11 @@ public class CityDistanceService {
     public List<CalculationResponse> calculateDistance(CalculationType calculationType, List<String> fromCitiesNames
             , List<String> toCitiesName) throws CannotBeCalculatedException {
         List<CalculationResponse> result = new ArrayList<>();
-        List<City1> fromCitiesList = findCities(fromCitiesNames);
-        List<City1> toCitiesList = findCities(toCitiesName);
+        List<City> fromCitiesList = findCities(fromCitiesNames);
+        List<City> toCitiesList = findCities(toCitiesName);
 
-        for (City1 from : fromCitiesList) {
-            for (City1 to : toCitiesList) {
+        for (City from : fromCitiesList) {
+            for (City to : toCitiesList) {
                 if (calculationType == DISTANCE_MATRIX || calculationType == ALL) {
                     result.add(calculateViaDistanceTable(from, to));
                 }
@@ -55,7 +55,7 @@ public class CityDistanceService {
         return result;
     }
 
-    private CalculationResponse calculateHaversineFunction(City1 from, City1 to) {
+    private CalculationResponse calculateHaversineFunction(City from, City to) {
         return new CalculationResponse(
                 CROWFLIGHT,
                 from.getName(),
@@ -63,8 +63,8 @@ public class CityDistanceService {
                 HaversineCalculation.calculateDistance(from, to));
     }
 
-    private CalculationResponse calculateViaDistanceTable(City1 from, City1 to) throws CannotBeCalculatedException {
-        Optional<Distance1> distanceOptional = distanceRepository.findByFromCityIdAndToCityId(from.getId(), to.getId());
+    private CalculationResponse calculateViaDistanceTable(City from, City to) throws CannotBeCalculatedException {
+        Optional<Distance> distanceOptional = distanceRepository.findByFromCityIdAndToCityId(from.getId(), to.getId());
         if (!distanceOptional.isPresent()) {
             throw new CannotBeCalculatedException("Not found distance for fromCity " + from.getName() + " and toCity " + to.getName());
         }
@@ -75,10 +75,10 @@ public class CityDistanceService {
                 distanceOptional.get().getDistance());
     }
 
-    private List<City1> findCities(List<String> fromCities) throws CannotBeCalculatedException {
-        List<City1> resultList = new ArrayList<>();
+    private List<City> findCities(List<String> fromCities) throws CannotBeCalculatedException {
+        List<City> resultList = new ArrayList<>();
         for (String fromCity : fromCities) {
-            Optional<City1> byName = cityRepository.findByName(fromCity);
+            Optional<City> byName = cityRepository.findByName(fromCity);
             if (byName.isPresent()) {
                 resultList.add(byName.get());
             } else {
@@ -89,14 +89,14 @@ public class CityDistanceService {
     }
 
     public Optional<Long> createDistance(DistanceCreationRequest distanceCreationRequest) {
-        Distance1 distance = new Distance1();
-        Optional<City1> fromCityOptional = cityRepository.findByName(distanceCreationRequest.getFromCity());
+        Distance distance = new Distance();
+        Optional<City> fromCityOptional = cityRepository.findByName(distanceCreationRequest.getFromCity());
         if (fromCityOptional.isPresent()) {
             distance.setFromCityId(fromCityOptional.get().getId());
         } else {
             return Optional.empty();
         }
-        Optional<City1> toCityOptional = cityRepository.findByName(distanceCreationRequest.getToCity());
+        Optional<City> toCityOptional = cityRepository.findByName(distanceCreationRequest.getToCity());
         if (toCityOptional.isPresent()) {
             distance.setToCityId(toCityOptional.get().getId());
         } else {
@@ -105,13 +105,13 @@ public class CityDistanceService {
 
         distance.setDistance(distanceCreationRequest.getDistance());
 
-        Distance1 save = distanceRepository.save(distance);
+        Distance save = distanceRepository.save(distance);
         return Optional.ofNullable(save.getId());
     }
 
     public void createCitiesAndDistancesList(CityAndDistanceCreationRequest cityAndDistanceCreationRequest) {
         for (CityCreationRequest cityCreationRequest : cityAndDistanceCreationRequest.getCityCreationRequests()) {
-            City1 city = new City1(
+            City city = new City(
                     cityCreationRequest.getName(),
                     cityCreationRequest.getLatitude(),
                     cityCreationRequest.getLongitude()
